@@ -1,4 +1,4 @@
-package com.example.androiddemo.ui
+package com.example.androiddemo.ui.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,7 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androiddemo.R
-import com.example.androiddemo.adapter.PostAdapter
+import com.example.androiddemo.ui.viewmodel.PostViewModel
+import com.example.androiddemo.ui.adapter.PostAdapter
 
 
 class DemoFragment : Fragment() {

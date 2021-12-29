@@ -1,4 +1,4 @@
-package com.example.androiddemo.adapter
+package com.example.androiddemo.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androiddemo.R
-import com.example.androiddemo.model.PostModel
+import com.example.androiddemo.data.model.PostModel
 
 class PostAdapter : RecyclerView.Adapter<PostAdapter.ViewHolder>() {
 

@@ -5,6 +5,6 @@
 
     <fragment
         android:id="@+id/demoFragment"
-        android:name="com.example.androiddemo.ui.DemoFragment"
+        android:name="com.example.androiddemo.ui.view.DemoFragment"
         android:label="DemoFragment" />
 </navigation>
