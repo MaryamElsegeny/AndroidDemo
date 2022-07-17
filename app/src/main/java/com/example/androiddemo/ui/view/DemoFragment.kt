@@ -6,26 +6,23 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androiddemo.R
 import com.example.androiddemo.data.model.PostModel
 import com.example.androiddemo.ui.adapter.PostAdapter
 import com.example.androiddemo.ui.viewmodel.PostViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import io.realm.Realm
 import io.realm.RealmConfiguration
 
-
+@AndroidEntryPoint
 class DemoFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var recyclerAdapter: PostAdapter
-    private lateinit var postViewModel: PostViewModel
+    private val postViewModel: PostViewModel by viewModels()
     private lateinit var realm: Realm
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,8 +46,7 @@ class DemoFragment : Fragment() {
     }
 
     private fun getData() {
-        postViewModel = ViewModelProvider(this).get(PostViewModel::class.java)
-        postViewModel.postListMutableLiveData.observe(requireActivity(), {
+        postViewModel.postListMutableLiveData.observe(requireActivity()) {
             recyclerAdapter.setPostListItems(it)
 
             realm.beginTransaction()
@@ -64,18 +60,18 @@ class DemoFragment : Fragment() {
                 post.title = it[i].title
             }
             realm.commitTransaction()
-        })
-        postViewModel.errorMessageMutableLiveData.observe(requireActivity(), {
+        }
+        postViewModel.errorMessageMutableLiveData.observe(requireActivity()) {
             Toast.makeText(
                 requireContext(),
                 it,
                 Toast.LENGTH_SHORT
             ).show()
-        })
-        postViewModel.offlineMutableLiveData.observe(requireActivity() , {
+        }
+        postViewModel.offlineMutableLiveData.observe(requireActivity()) {
             val data = realm.where(PostModel::class.java).findAll()
             recyclerAdapter.setPostListItems(data)
-        })
+        }
         postViewModel.getPost()
     }
 
